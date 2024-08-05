@@ -143,6 +143,9 @@ CORS_ORIGIN_WHITELIST = [
     "http://yellowtaxi.store:8000",
 
     "https://yellowtaxi.store",
+    "http://yellowtaxi.store",
+    "https://3.133.16.196",
+
     ]
 
 
