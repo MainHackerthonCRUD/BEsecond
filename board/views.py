@@ -74,6 +74,7 @@ def check_id(req_id):
 
 
 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 '''
@@ -169,28 +170,38 @@ def kakako_callback(request):
 
     if flag:
         # true : 존재함
-        print(access_token)
+        kakao_user=CustomUser(nickname=user_nickname)
+        kakao_user.save()
+        token=TokenObtainPairSerializer.get_token(kakao_user)
+        kakao_access_token=str(token.access_token)
+        return_data={
+            "nickname":kakao_user.nickname,
+            "id":kakao_user.id,
+            "access_token":kakao_access_token
 
+        }
+
+        return Response(return_data,status=status.HTTP_201_CREATED)
 
 
 
 
         # 로그인 후 access token 반환 받은 것으로 수정해서 보내주기
         # al_user=CustomUser.objects.get(nickname=user_nickname)
-        try:
-            ans_login_data=requests.post(login_url,data=login_data,time=100000000)
-            print()
-            print("ans_login_data")
-            print(ans_login_data)
-            ans_login_data_json=ans_login_data.json()
-            print()
+        # try:
+        #     ans_login_data=requests.post(login_url,data=login_data,time=100000000)
+        #     print()
+        #     print("ans_login_data")
+        #     print(ans_login_data)
+        #     ans_login_data_json=ans_login_data.json()
+        #     print()
             
 
 
-            return Response(ans_login_data_json,status=status.HTTP_200_OK)
+        #     return Response(ans_login_data_json,status=status.HTTP_200_OK)
 
-        except requests.exceptions.RequestException as e:
-            return Response({"error":str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        # except requests.exceptions.RequestException as e:
+        #     return Response({"error":str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     else:
         # false : 존재하지 않음 -> 회원가입 진행
