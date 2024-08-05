@@ -37,6 +37,11 @@ class CommentResponseSerializer(serializers.ModelSerializer):
         return time.strftime('%Y-%m-%d')
 
 
+class CustomUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=CustomUser
+        fields=['id','nickname']
+
 
 # user로부터 comment 역참조
 class MypageSerializer(serializers.ModelSerializer):
