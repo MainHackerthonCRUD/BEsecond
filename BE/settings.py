@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ['3.105.114.117','obspital.shop','127.0.0.1']
 ALLOWED_HOSTS = ['3.133.16.196','yellowtaxi.store','127.0.0.1']
@@ -145,6 +145,9 @@ CORS_ORIGIN_WHITELIST = [
     "https://yellowtaxi.store",
     "http://yellowtaxi.store",
     "https://3.133.16.196",
+    "https://kauth.kakao.com/oauth/token",
+
+    
 
     ]
 

@@ -174,7 +174,9 @@ def kakako_callback(request):
         # 로그인 후 access token 반환 받은 것으로 수정해서 보내주기
         # al_user=CustomUser.objects.get(nickname=user_nickname)
         try:
-            ans_login_data=requests.post(login_url,data=login_data)
+            ans_login_data=requests.post(login_url,data=login_data,
+                                         headers = {'Content-Type': 'application/json'}
+)
             print()
             print("ans_login_data")
             print(ans_login_data)
