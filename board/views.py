@@ -172,6 +172,9 @@ def kakako_callback(request):
         print(access_token)
 
 
+
+
+
         # 로그인 후 access token 반환 받은 것으로 수정해서 보내주기
         # al_user=CustomUser.objects.get(nickname=user_nickname)
         try:
@@ -181,10 +184,7 @@ def kakako_callback(request):
             print(ans_login_data)
             ans_login_data_json=ans_login_data.json()
             print()
-            print()
-            print(ans_login_data_json)
-            for data in ans_login_data:
-                print(data)
+            
 
 
             return Response(ans_login_data_json,status=status.HTTP_200_OK)
@@ -195,6 +195,7 @@ def kakako_callback(request):
     else:
         # false : 존재하지 않음 -> 회원가입 진행
         regist_response=requests.post(regist_url,data=regist_data).json()
+        # .json()을 해버리면 본문만 남음.
         if regist_response.status_code==201:
             al_user=CustomUser.objects.get(nickname=user_nickname).json()
             # return_data={
