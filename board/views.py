@@ -145,14 +145,21 @@ def kakako_callback(request):
         # true : 존재함
         # 로그인 후 access token 반환 받은 것으로 수정해서 보내주기
         al_user=CustomUser.objects.get(nickname=user_nickname)
-        ans_login_data=requests.post(login_url,data=login_data).json()
+        ans_login_data=requests.post(login_url,data=login_data)
+        print()
+        print("ans_login_data")
+        print(ans_login_data)
+        ans_login_data_json=ans_login_data.json()
         print()
         print()
         print(ans_login_data)
         for data in ans_login_data:
             print(data)
-        
-        return Response(ans_login_data,status=status.HTTP_200_OK)
+
+        if ans_login_data.status_code==499:
+            return "499error"
+        else:
+            return Response(ans_login_data_json,status=status.HTTP_200_OK)
     
     else:
         # false : 존재하지 않음 -> 회원가입 진행
@@ -165,9 +172,12 @@ def kakako_callback(request):
             #     "access_token":access_token
             # }
             return Response(regist_response,status=status.HTTP_201_CREATED)
+        elif regist_response.status_code==499:
+            return "499error"
         else:
             print('실패')
             return Response(status=status.HTTP_400_BAD_REQUEST)
+        
         # return Response({f"access_token":{access_token}},status=status.HTTP_200_OK)
 
 
