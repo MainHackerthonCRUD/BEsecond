@@ -93,8 +93,21 @@ def kakako_callback(request):
     access_token=requests.post(kakao_token_api,data=data).json()['access_token']
     
 
+    print()
+    print()
+    print()
+    print()
+    print(access_token)
 
 
+
+
+
+
+
+
+
+    # ----------사용자 정보 가져오기-------------
 
 
     kakao_user_api="https://kapi.kakao.com/v2/user/me"
@@ -104,9 +117,7 @@ def kakako_callback(request):
     # data={
     #     "property_keys:['kakao_account.email']"
     # }
-    print()
-    print()
-    print(access_token.json())
+    
     # user_information=requests.get(kakao_user_api,headers=header,data=data).json()
     # user_information=requests.get(kakao_user_api,headers=header).json()
     user_info=requests.get("https://kapi.kakao.com/v2/user/me",headers={"Authorization":f"Bearer {access_token}"}).json()
@@ -119,6 +130,19 @@ def kakako_callback(request):
         elif i=='properties':
             user_nickname=user_info[i]['nickname']
 
+    print()
+    print()
+    print(f"user_id : {user_id}")
+    print(f"user_nickname : {user_nickname}")
+    print()
+    print()
+
+
+
+
+
+
+    # -------------------로그인 및 회원가입----------------
     
     regist_url="https://yellowtaxi.store/dj/registration/"
     login_url="https://yellowtaxi.store/dj/login/"
@@ -133,16 +157,14 @@ def kakako_callback(request):
         "username":str(user_id),
         "password":"asdf1234qwer"
     }
-    print()
-    print()
-    print(f"user_id : {user_id}")
-    print(f"user_nickname : {user_nickname}")
-    print()
-    print()
+    
     #-----------
 
 
     flag=check_id(str(user_id))
+    print()
+    print()
+    print(flag)
 
     if flag:
         # true : 존재함
