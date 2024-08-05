@@ -172,11 +172,12 @@ def kakako_callback(request):
         # true : 존재함
         
         kakao_user=CustomUser.objects.get(nickname=user_nickname)
-        print(kakao_user)
+        kakao_serializer=CustomUserSerializer(kakao_user)
+        print(kakao_serializer.data)
         print()
         print()
-        print(kakao_user.json())
-        return Response(kakao_user,status=status.HTTP_200_OK)
+
+        return Response(kakao_serializer.data,status=status.HTTP_200_OK)
 
 
 
