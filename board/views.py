@@ -146,7 +146,7 @@ def kakako_callback(request):
         # true : 존재함
         # 로그인 후 access token 반환 받은 것으로 수정해서 보내주기
         al_user=CustomUser.objects.get(nickname=user_nickname)
-        ans_login_data=requests.post(login_url,data=login_data.json())
+        ans_login_data=requests.post(login_url,json=login_data)
         print()
         print("ans_login_data")
         print(ans_login_data)
@@ -164,7 +164,7 @@ def kakako_callback(request):
     
     else:
         # false : 존재하지 않음 -> 회원가입 진행
-        regist_response=requests.post(regist_url,data=regist_data.json()).json()
+        regist_response=requests.post(regist_url,json=regist_data).json()
         if regist_response.status_code==201:
             al_user=CustomUser.objects.get(nickname=user_nickname).json()
             # return_data={
