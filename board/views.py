@@ -49,7 +49,7 @@ from django.shortcuts import redirect
 def kakao(request):
 
     kakao_api="https://kauth.kakao.com/oauth/authorize?"
-    redirect_uri="http://127.0.0.1:8000/kakao/callback/"
+    redirect_uri="http://yellowtaxi.store/kakao/callback/"
     client_id="6bf5f3d7db0da82bb551b5e113dcc846"
     response_type="code"
 
@@ -85,7 +85,7 @@ def kakako_callback(request):
     data={
         "grant_type"    :"authorization_code",
         "client_id":"6bf5f3d7db0da82bb551b5e113dcc846",
-        "redirect_uri":"http://127.0.0.1:8000/kakao/callback/",
+        "redirect_uri":"http://yellowtaxi.store/kakao/callback/",
         "code":request.GET["code"]
     }
 
