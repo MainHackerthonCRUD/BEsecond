@@ -168,7 +168,7 @@ def kakako_callback(request):
 
     if flag:
         # true : 존재함
-        print(access_token.json)
+        print(access_token)
 
 
         # 로그인 후 access token 반환 받은 것으로 수정해서 보내주기
