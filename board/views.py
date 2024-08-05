@@ -171,7 +171,7 @@ def kakako_callback(request):
     
     else:
         # false : 존재하지 않음 -> 회원가입 진행
-        regist_response=requests.post(regist_url,json=regist_data).json()
+        regist_response=requests.post(regist_url,json=regist_data,timeout=3).json()
         if regist_response.status_code==201:
             al_user=CustomUser.objects.get(nickname=user_nickname).json()
             # return_data={
