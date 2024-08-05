@@ -178,6 +178,8 @@ def kakako_callback(request):
         print()
         token=TokenObtainPairSerializer.get_token(kakao_user)
         kakao_access_token=str(token.access_token)
+
+        print(kakao_access_token)
         
         return_data={
             "id":kakao_serializer.data.id,
