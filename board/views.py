@@ -172,6 +172,10 @@ def kakako_callback(request):
         # true : 존재함
         
         kakao_user=CustomUser.objects.get(nickname=user_nickname)
+        print(kakao_user)
+        print()
+        print()
+        print(kakao_user.json())
         return Response(kakao_user,status=status.HTTP_200_OK)
 
 
