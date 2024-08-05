@@ -130,14 +130,16 @@ def kakako_callback(request):
         "username":str(user_id),
         "password":"asdf1234qwer"
     }
-
-#-----------
+    print()
+    print()
+    print(f"user_id : {user_id}")
+    print(f"user_nickname : {user_nickname}")
+    print()
+    print()
+    #-----------
 
 
     flag=check_id(str(user_id))
-    print()
-    print()
-    print(flag)
 
     if flag:
         # true : 존재함

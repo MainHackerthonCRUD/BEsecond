@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ['3.105.114.117','obspital.shop','127.0.0.1']
 ALLOWED_HOSTS = ['3.133.16.196','yellowtaxi.store','127.0.0.1']
@@ -59,16 +59,18 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'dj_rest_auth.registration',
     
-
     # 추가
     'rest_framework_simplejwt.token_blacklist',
-    'django.contrib.sites',    
+    'django.contrib.sites',  
+    
 
     # allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.kakao',
+
+      
 
     'rest_framework_simplejwt',
     'django_extensions',
