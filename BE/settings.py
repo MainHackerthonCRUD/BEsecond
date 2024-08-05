@@ -134,8 +134,8 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:5173",
     "http://127.0.0.1:8000",
     "http://localhost:5173",
-    "https://yellowtaxi.store",
-    "https://yellowtaxi.store/",
+    "https://yellowtaxi.store:443",
+    "https://yellowtaxi.store:3000",
     ]
 
 
