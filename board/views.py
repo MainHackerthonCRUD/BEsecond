@@ -145,7 +145,7 @@ def kakako_callback(request):
     # -------------------로그인 및 회원가입----------------
     
     regist_url="https://yellowtaxi.store/dj/registration/"
-    login_url="https://127.0.0.1:8000/dj/login/"
+    login_url="https://yellowtaxi.store/dj/login/"
     regist_data={
         "username":str(user_id),
         "password1":"asdf1234qwer",
