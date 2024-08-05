@@ -49,7 +49,7 @@ from django.shortcuts import redirect
 def kakao(request):
 
     kakao_api="https://kauth.kakao.com/oauth/authorize?"
-    redirect_uri="https://yellowtaxi.store/kakao/callback/"
+    redirect_uri="http://127.0.0.1:8000/kakao/callback/"
     client_id="6bf5f3d7db0da82bb551b5e113dcc846"
     response_type="code"
 
@@ -77,7 +77,7 @@ def check_id(req_id):
 
 
 '''
-https://kauth.kakao.com/oauth/authorize?client_id=6bf5f3d7db0da82bb551b5e113dcc846&redirect_uri=https://yellowtaxi.store/kakao/callback/&response_type=code
+https://kauth.kakao.com/oauth/authorize?client_id=6bf5f3d7db0da82bb551b5e113dcc846&redirect_uri=http://127.0.0.1:8000/kakao/callback/&response_type=code
 '''
 @api_view(['GET'])
 def kakako_callback(request):
@@ -85,7 +85,7 @@ def kakako_callback(request):
     data={
         "grant_type"    :"authorization_code",
         "client_id":"6bf5f3d7db0da82bb551b5e113dcc846",
-        "redirect_uri":"https://yellowtaxi.store/kakao/callback/",
+        "redirect_uri":"http://127.0.0.1:8000/kakao/callback/",
         "code":request.GET["code"]
     }
 
@@ -155,7 +155,8 @@ def kakako_callback(request):
 
     login_data={
         "username":str(user_id),
-        "password":"asdf1234qwer"
+        "password":"asdf1234qwer",
+        "email":None
     }
     
     #-----------
@@ -174,16 +175,14 @@ def kakako_callback(request):
         # 로그인 후 access token 반환 받은 것으로 수정해서 보내주기
         # al_user=CustomUser.objects.get(nickname=user_nickname)
         try:
-            ans_login_data=requests.post(login_url,data=login_data,
-                                         headers = {'Content-Type': 'application/json'}
-)
+            ans_login_data=requests.post(login_url,data=login_data)
             print()
             print("ans_login_data")
             print(ans_login_data)
             ans_login_data_json=ans_login_data.json()
             print()
             print()
-            print(ans_login_data)
+            print(ans_login_data_json)
             for data in ans_login_data:
                 print(data)
 
@@ -195,7 +194,7 @@ def kakako_callback(request):
     
     else:
         # false : 존재하지 않음 -> 회원가입 진행
-        regist_response=requests.post(regist_url,data=regist_data,timeout=3).json()
+        regist_response=requests.post(regist_url,data=regist_data).json()
         if regist_response.status_code==201:
             al_user=CustomUser.objects.get(nickname=user_nickname).json()
             # return_data={
