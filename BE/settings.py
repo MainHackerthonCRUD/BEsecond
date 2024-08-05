@@ -145,11 +145,10 @@ CORS_ORIGIN_WHITELIST = [
     "https://yellowtaxi.store",
     "http://yellowtaxi.store",
     "https://3.133.16.196",
-    "https://kauth.kakao.com/oauth/token",
 
     
 
-    ]
+]
 
 
 
