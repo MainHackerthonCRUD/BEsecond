@@ -137,10 +137,12 @@ CORS_ORIGIN_WHITELIST = [
     "https://yellowtaxi.store:443",
     "https://yellowtaxi.store:3000",
     "https://yellowtaxi.store:8000",
-    
+
     "http://yellowtaxi.store:443",
     "http://yellowtaxi.store:3000",
     "http://yellowtaxi.store:8000",
+
+    "https://yellowtaxi.store",
     ]
 
 
