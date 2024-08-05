@@ -88,6 +88,7 @@ def kakako_callback(request):
         "redirect_uri":"https://yellowtaxi.store/kakao/callback/",
         "code":request.GET["code"]
     }
+
     kakao_token_api="https://kauth.kakao.com/oauth/token"
     access_token=requests.post(kakao_token_api,data=data).json()['access_token']
     
@@ -124,7 +125,6 @@ def kakako_callback(request):
         "password1":"asdf1234qwer",
         "password2":"asdf1234qwer",
         "nickname":user_nickname
-        
     }
 
     login_data={
@@ -146,21 +146,22 @@ def kakako_callback(request):
         # true : 존재함
         # 로그인 후 access token 반환 받은 것으로 수정해서 보내주기
         al_user=CustomUser.objects.get(nickname=user_nickname)
-        ans_login_data=requests.post(login_url,json=login_data)
-        print()
-        print("ans_login_data")
-        print(ans_login_data)
-        ans_login_data_json=ans_login_data.json()
-        print()
-        print()
-        print(ans_login_data)
-        for data in ans_login_data:
-            print(data)
+        try:
+            ans_login_data=requests.post(login_url,json=login_data)
+            print()
+            print("ans_login_data")
+            print(ans_login_data)
+            ans_login_data_json=ans_login_data.json()
+            print()
+            print()
+            print(ans_login_data)
+            for data in ans_login_data:
+                print(data)
 
-        if ans_login_data.status_code==499:
-            return "499error"
-        else:
+
             return Response(ans_login_data_json,status=status.HTTP_200_OK)
+        except requests.exceptions.RequestException as e:
+            return Response({"error":str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     else:
         # false : 존재하지 않음 -> 회원가입 진행
