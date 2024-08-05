@@ -104,7 +104,9 @@ def kakako_callback(request):
     # data={
     #     "property_keys:['kakao_account.email']"
     # }
-
+    print()
+    print()
+    print(access_token.json())
     # user_information=requests.get(kakao_user_api,headers=header,data=data).json()
     # user_information=requests.get(kakao_user_api,headers=header).json()
     user_info=requests.get("https://kapi.kakao.com/v2/user/me",headers={"Authorization":f"Bearer {access_token}"}).json()
@@ -144,24 +146,28 @@ def kakako_callback(request):
 
     if flag:
         # true : 존재함
+        print(access_token.json)
+
+
         # 로그인 후 access token 반환 받은 것으로 수정해서 보내주기
-        al_user=CustomUser.objects.get(nickname=user_nickname)
-        try:
-            ans_login_data=requests.post(login_url,json=login_data)
-            print()
-            print("ans_login_data")
-            print(ans_login_data)
-            ans_login_data_json=ans_login_data.json()
-            print()
-            print()
-            print(ans_login_data)
-            for data in ans_login_data:
-                print(data)
+        # al_user=CustomUser.objects.get(nickname=user_nickname)
+        # try:
+        #     ans_login_data=requests.post(login_url,json=login_data)
+        #     print()
+        #     print("ans_login_data")
+        #     print(ans_login_data)
+        #     ans_login_data_json=ans_login_data.json()
+        #     print()
+        #     print()
+        #     print(ans_login_data)
+        #     for data in ans_login_data:
+        #         print(data)
 
 
-            return Response(ans_login_data_json,status=status.HTTP_200_OK)
-        except requests.exceptions.RequestException as e:
-            return Response({"error":str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            # return Response(ans_login_data_json,status=status.HTTP_200_OK)
+
+        # except requests.exceptions.RequestException as e:
+        #     return Response({"error":str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     else:
         # false : 존재하지 않음 -> 회원가입 진행
