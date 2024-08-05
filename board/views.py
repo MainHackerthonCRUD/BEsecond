@@ -173,9 +173,7 @@ def kakako_callback(request):
         
         kakao_user=CustomUser.objects.get(nickname=user_nickname)
         kakao_serializer=CustomUserSerializer(kakao_user)
-        print(kakao_serializer.data)
-        print()
-        print()
+
         token=TokenObtainPairSerializer.get_token(kakao_user)
         kakao_access_token=str(token.access_token)
         print(kakao_access_token)
@@ -215,14 +213,17 @@ def kakako_callback(request):
     else:
         kakao_user=CustomUser(nickname=user_nickname)
         kakao_user.save()
+        kakao_user=CustomUser.objects.get(nickname=user_nickname)
         token=TokenObtainPairSerializer.get_token(kakao_user)
         kakao_access_token=str(token.access_token)
-        return_data={
-            "nickname":kakao_user.nickname,
-            "id":kakao_user.id,
-            "access_token":kakao_access_token
 
+        
+        return_data={
+            "id":kakao_serializer.data['id'],
+            "nickname":kakao_serializer.data['nickname'],
+            "access_token":kakao_access_token
         }
+        
 
         return Response(return_data,status=status.HTTP_200_OK)
 
