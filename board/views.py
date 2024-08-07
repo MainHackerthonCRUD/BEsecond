@@ -24,33 +24,30 @@ import json
     http://127.0.0.1:8000/kakao/
 
     rest api키
-    6bf5f3d7db0da82bb551b5e113dcc846
+
 '''
 '''
 (예시)
 https://kauth.kakao.com/oauth/authorize?client_id=REST_API 키&redirect_uri=http://127.0.0.1:8000/&response_type=code
 (변형)
 https://kauth.kakao.com/oauth/authorize?
-client_id=6bf5f3d7db0da82bb551b5e113dcc846&
+
 redirect_uri=http://127.0.0.1:8000/&
 response_type=code
 
-(한 줄로 - 복붙용)
-https://kauth.kakao.com/oauth/authorize?client_id=6bf5f3d7db0da82bb551b5e113dcc846&redirect_uri=http://127.0.0.1:8000/kakao/callback/&response_type=code
-위 예시를 활용해서 링크를 만들어 접속해야 함
-나중에 순서 바꿔서 해보기. 상관 없을 것 같음
+
 '''
 
 
 #------------mine-----------
 from django.shortcuts import redirect
-
+from decouple import config
 
 def kakao(request):
 
     kakao_api="https://kauth.kakao.com/oauth/authorize?"
     redirect_uri="https://yellowtaxi.store/kakao/callback/"
-    client_id="6bf5f3d7db0da82bb551b5e113dcc846"
+    client_id=config('Client_ID')
     response_type="code"
 
     return redirect(f"{kakao_api}&client_id={client_id}&redirect_uri={redirect_uri}&response_type={response_type}")
@@ -77,15 +74,13 @@ def check_id(req_id):
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
-'''
-https://kauth.kakao.com/oauth/authorize?client_id=6bf5f3d7db0da82bb551b5e113dcc846&redirect_uri=https://yellowtaxi.store/kakao/callback/&response_type=code
-'''
+
 @api_view(['GET'])
 def kakako_callback(request):
 
     data={
         "grant_type"    :"authorization_code",
-        "client_id":"6bf5f3d7db0da82bb551b5e113dcc846",
+        "client_id":config('Client_ID'),
         "redirect_uri":"https://yellowtaxi.store/kakao/callback/",
         "code":request.GET["code"]
     }
